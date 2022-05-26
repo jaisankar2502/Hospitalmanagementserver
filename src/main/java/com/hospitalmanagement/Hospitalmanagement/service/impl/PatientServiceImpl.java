@@ -29,4 +29,11 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findTime(doctorName, bookDate).stream().map(email -> new Patienttimeslote(email)).collect(Collectors.toList());
 
     }
+
+    @Override
+    public Long PatientCountForDoc(Integer id) {
+        return  patientRepository.patientCountForDoctor(id);
+    }
+
+
 }

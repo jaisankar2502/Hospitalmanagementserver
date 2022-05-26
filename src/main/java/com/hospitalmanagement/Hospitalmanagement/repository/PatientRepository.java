@@ -2,6 +2,7 @@ package com.hospitalmanagement.Hospitalmanagement.repository;
 
 import com.hospitalmanagement.Hospitalmanagement.entity.Patient;
 import com.hospitalmanagement.Hospitalmanagement.entity.User;
+import com.hospitalmanagement.Hospitalmanagement.view.PatientView;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
@@ -17,6 +18,9 @@ public interface PatientRepository extends Repository<Patient, Integer> {
     List<Patient> findTime(Integer doctorName, String date);
 
 
-    @Query(value = "SELECT count(distinct booking_id) FROM patient", nativeQuery = true)
-    public Long count();
+    @Query(value = "SELECT count( distinct booking_id) From patient where doctor_name=?1", nativeQuery = true)
+    public Long patientCountForDoctor(Integer id);
+
+
 }
+

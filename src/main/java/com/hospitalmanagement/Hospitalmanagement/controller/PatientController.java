@@ -29,6 +29,12 @@ public class PatientController {
 
     return patientService.fetchTime(docid,date);
     }
+    @GetMapping("/{id}")
+    public Long PatientCountForDoc(@PathVariable Integer id){
+
+     return patientService.PatientCountForDoc(id);
+
+    }
 
 
 
