@@ -24,4 +24,4 @@ public Long patientCountForDoctor(Integer id);
 @Query(value = "SELECT * FROM patient where doctor_name=?1 and book_date=?2",nativeQuery = true)
 public List<Patient>findCurrentPatient(Integer id,String date);
 
-        }
+}
