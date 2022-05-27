@@ -26,13 +26,18 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patienttimeslote> fetchTime(Integer doctorName, String bookDate) {
-        return patientRepository.findTime(doctorName, bookDate).stream().map(email -> new Patienttimeslote(email)).collect(Collectors.toList());
+        return patientRepository.findTime(doctorName, bookDate).stream().map(Patienttimeslote::new).collect(Collectors.toList());
 
     }
 
     @Override
     public Long PatientCountForDoc(Integer id) {
         return  patientRepository.patientCountForDoctor(id);
+    }
+
+    @Override
+    public List<PatientView> fetchCurrentPatient(Integer id, String date) {
+        return patientRepository.findCurrentPatient(id,date).stream().map(PatientView::new).collect(Collectors.toList());
     }
 
 

@@ -16,4 +16,6 @@ public interface PatientService {
     List<Patienttimeslote> fetchTime(Integer doctorName, String bookDate);
 
     Long PatientCountForDoc(Integer id);
+
+    List<PatientView> fetchCurrentPatient(Integer id, String date);
 }

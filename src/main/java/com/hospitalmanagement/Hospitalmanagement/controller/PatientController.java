@@ -6,6 +6,7 @@ import com.hospitalmanagement.Hospitalmanagement.view.PatientView;
 import com.hospitalmanagement.Hospitalmanagement.view.Patienttimeslote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.tags.EditorAwareTag;
 
 import java.util.Collection;
 import java.util.List;
@@ -34,6 +35,12 @@ public class PatientController {
 
      return patientService.PatientCountForDoc(id);
 
+    }
+    @GetMapping("/list")
+  public List<PatientView>fetchCurrentPatient(@RequestParam Integer id,@RequestParam String date){
+      System.out.println(id);
+      System.out.println(date);
+    return  patientService.fetchCurrentPatient(Integer.parseInt(String.valueOf(id)),date);
     }
 
 
