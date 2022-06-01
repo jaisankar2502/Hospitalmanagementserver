@@ -20,7 +20,7 @@ public class PatientController {
   private PatientService patientService;
 
 
-  @PostMapping
+  @PostMapping("/add")
     public PatientView add_Patient(@RequestBody PatientForm patientForm) {
     return patientService.add(patientForm);
   }

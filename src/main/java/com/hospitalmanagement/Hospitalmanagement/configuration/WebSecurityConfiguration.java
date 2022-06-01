@@ -43,6 +43,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(OPTIONS, "/user").anonymous()
                 .antMatchers("/user/doctor/*").anonymous()
                 .antMatchers(OPTIONS,"/patient").anonymous()
+                .antMatchers("/patient/add").anonymous()
                 .antMatchers("/patient/time/*").anonymous()
                 .antMatchers("/user/patientDep").anonymous()
                 .anyRequest().authenticated();
