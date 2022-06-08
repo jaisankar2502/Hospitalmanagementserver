@@ -2,8 +2,6 @@ package com.hospitalmanagement.Hospitalmanagement.form;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-import java.sql.Time;
-import java.util.Date;
 
 public class PatientForm {
     @Size(max=30)
@@ -22,15 +20,15 @@ public class PatientForm {
     @Size(max=20)
     private Integer DoctorName;
 
-    private String BookingDate;
+    private String BookDate;
     private String BookingTime;
 
-    public String getBookingDate() {
-        return BookingDate;
+    public String getBookDate() {
+        return BookDate;
     }
 
-    public void setBookingDate(String bookingDate) {
-        BookingDate = bookingDate;
+    public void setBookDate(String bookDate) {
+        BookDate = bookDate;
     }
 
     public String getBookingTime() {

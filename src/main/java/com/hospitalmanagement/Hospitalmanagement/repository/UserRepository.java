@@ -19,7 +19,7 @@ public interface UserRepository extends Repository<User, Integer> {
 
     Collection<User>findAll();
     @Query(value = "SELECT count(distinct user_id) From user where type=2" ,nativeQuery = true)
-    public Long count();
+      Long count();
 
     @Query(value ="SELECT i FROM Department i  where i. DepId!=1 ")
     Collection<Department>findDoctor();

@@ -60,7 +60,7 @@ public class Patient {
         this.Phone= form.getPhone();
         this.Department= form.getDepartment();
         this.DoctorName= form.getDoctorName();
-        this.BookDate= form.getBookingDate();
+        this.BookDate= form.getBookDate();
         this.BookingTime= form.getBookingTime();
         Date dt= new Date();
         this.createDate= dt;
@@ -133,13 +133,7 @@ public class Patient {
         DoctorName = doctorName;
     }
 
-    public String getBookDate() {
-        return BookDate;
-    }
 
-    public void setBookDate(String bookDate) {
-        BookDate = bookDate;
-    }
 
     public String getBookingTime() {
         return BookingTime;
@@ -154,9 +148,13 @@ public class Patient {
     }
 
 
+    public String getBookDate() {
+        return BookDate;
+    }
 
-
-
+    public void setBookDate(String bookDate) {
+        BookDate = bookDate;
+    }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;

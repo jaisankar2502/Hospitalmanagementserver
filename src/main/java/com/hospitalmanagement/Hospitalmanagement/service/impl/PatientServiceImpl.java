@@ -23,7 +23,6 @@ public class PatientServiceImpl implements PatientService {
         return new PatientView(patientRepository.save(new Patient(patientForm)));
     }
 
-
     @Override
     public List<Patienttimeslote> fetchTime(Integer doctorName, String bookDate) {
         return patientRepository.findTime(doctorName, bookDate).stream().map(Patienttimeslote::new).collect(Collectors.toList());

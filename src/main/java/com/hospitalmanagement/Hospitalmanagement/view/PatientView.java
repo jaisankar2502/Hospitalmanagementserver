@@ -38,6 +38,8 @@ public class PatientView {
         this.updateDate=patient.getUpdateDate();
     }
 
+
+
     public int getBooking_Id() {
         return Booking_Id;
     }

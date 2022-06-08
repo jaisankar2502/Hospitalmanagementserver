@@ -1,14 +1,13 @@
 package com.hospitalmanagement.Hospitalmanagement.controller;
 
+import com.hospitalmanagement.Hospitalmanagement.entity.Patient;
 import com.hospitalmanagement.Hospitalmanagement.form.PatientForm;
 import com.hospitalmanagement.Hospitalmanagement.service.PatientService;
 import com.hospitalmanagement.Hospitalmanagement.view.PatientView;
 import com.hospitalmanagement.Hospitalmanagement.view.Patienttimeslote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.tags.EditorAwareTag;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
