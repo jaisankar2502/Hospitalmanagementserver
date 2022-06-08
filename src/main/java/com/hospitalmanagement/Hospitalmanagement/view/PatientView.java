@@ -87,4 +87,6 @@ public class PatientView {
     public String getBookingTime() {
         return BookingTime;
     }
+
+
 }
