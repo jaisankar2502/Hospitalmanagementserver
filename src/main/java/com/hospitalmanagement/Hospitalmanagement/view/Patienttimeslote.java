@@ -1,6 +1,7 @@
 package com.hospitalmanagement.Hospitalmanagement.view;
 
 import com.hospitalmanagement.Hospitalmanagement.entity.Patient;
+import com.hospitalmanagement.Hospitalmanagement.repository.PatientRepository;
 
 public class Patienttimeslote {
     private  final String BookingTime;
@@ -12,4 +13,6 @@ public class Patienttimeslote {
     public String getBookingTime() {
         return BookingTime;
     }
+
+
 }
