@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,10 +23,16 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
+
     public WebSecurityConfiguration() {
         super(true);
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/login");
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -41,6 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(POST, "/login").anonymous()
                 .antMatchers(PUT,"/login").anonymous()
                 .antMatchers(OPTIONS, "/user").anonymous()
+                .antMatchers("/user/leave/patient").anonymous()
                 .antMatchers("/user/doctor/*").anonymous()
                 .antMatchers(OPTIONS,"/patient").anonymous()
                 .antMatchers("/patient/add").anonymous()

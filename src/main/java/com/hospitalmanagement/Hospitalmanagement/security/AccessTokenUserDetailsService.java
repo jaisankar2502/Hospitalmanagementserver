@@ -27,6 +27,7 @@ public class AccessTokenUserDetailsService implements AuthenticationUserDetailsS
 
     @Override
     public UserDetails loadUserDetails(PreAuthenticatedAuthenticationToken token) throws UsernameNotFoundException {
+        System.out.println("........................................");
         if (!PURPOSE_ACCESS_TOKEN.equals(token.getCredentials())) {
             throw new UsernameNotFoundException("Invalid credentials");
         }

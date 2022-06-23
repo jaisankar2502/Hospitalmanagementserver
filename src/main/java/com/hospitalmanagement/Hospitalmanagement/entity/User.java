@@ -17,7 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer UserId;
+    private Integer userId;
 
     private String firstName;
 
@@ -58,7 +58,7 @@ public class User {
 
 
     public User(Integer userId){
-        this.UserId=userId;
+        this.userId =userId;
     }
     public User(UserForm form){
         this.firstName=form.getFirstName();
@@ -82,11 +82,11 @@ public class User {
     }
 
     public Integer getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(Integer userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public String getFirstName() {

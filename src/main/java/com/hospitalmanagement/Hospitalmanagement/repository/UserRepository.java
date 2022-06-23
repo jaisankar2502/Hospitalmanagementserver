@@ -2,13 +2,10 @@ package com.hospitalmanagement.Hospitalmanagement.repository;
 
 import com.hospitalmanagement.Hospitalmanagement.entity.Department;
 import com.hospitalmanagement.Hospitalmanagement.entity.User;
-import com.hospitalmanagement.Hospitalmanagement.view.UserView;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends Repository<User, Integer> {
@@ -25,6 +22,7 @@ public interface UserRepository extends Repository<User, Integer> {
     Collection<Department>findDoctor();
     @Query(value = "SELECT distinct *  FROM  user where dep_id = ?1", nativeQuery = true)
     Collection<User>findDoctorName(Integer id);
+
 
 
 }

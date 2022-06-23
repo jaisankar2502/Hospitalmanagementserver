@@ -1,20 +1,20 @@
 package com.hospitalmanagement.Hospitalmanagement.service.impl;
 
 import com.hospitalmanagement.Hospitalmanagement.entity.Department;
+import com.hospitalmanagement.Hospitalmanagement.entity.LeaveDetails;
 import com.hospitalmanagement.Hospitalmanagement.entity.User;
 import com.hospitalmanagement.Hospitalmanagement.exception.BadRequestException;
-import com.hospitalmanagement.Hospitalmanagement.exception.NotFoundException;
 import com.hospitalmanagement.Hospitalmanagement.form.DepartmentForm;
+import com.hospitalmanagement.Hospitalmanagement.form.LeaveForm;
 import com.hospitalmanagement.Hospitalmanagement.form.LoginForm;
 import com.hospitalmanagement.Hospitalmanagement.form.UserForm;
 import com.hospitalmanagement.Hospitalmanagement.repository.DepartmentRepository;
+import com.hospitalmanagement.Hospitalmanagement.repository.LeaveRepository;
 import com.hospitalmanagement.Hospitalmanagement.repository.UserRepository;
 import com.hospitalmanagement.Hospitalmanagement.security.config.SecurityConfig;
 import com.hospitalmanagement.Hospitalmanagement.security.util.TokenGenerator;
 import com.hospitalmanagement.Hospitalmanagement.service.UserService;
-import com.hospitalmanagement.Hospitalmanagement.view.DepartmentView;
-import com.hospitalmanagement.Hospitalmanagement.view.LoginView;
-import com.hospitalmanagement.Hospitalmanagement.view.UserView;
+import com.hospitalmanagement.Hospitalmanagement.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,6 +40,9 @@ public class UserServiceImpl implements UserService {
     private TokenGenerator tokenGenerator;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LeaveRepository leaveRepository;
+
     @Autowired
     private DepartmentRepository departmentRepository;
     User user;
@@ -68,7 +71,6 @@ public class UserServiceImpl implements UserService {
         if (!Objects.equals(loginForm.getPassword(), user.getPassword())) {
             throw badRequestException();
         }
-
         String id = String.format("%010d", user.getUserId());
         Token accessToken = tokenGenerator.create(PURPOSE_ACCESS_TOKEN, id, securityConfig.getAccessTokenExpiry());
         Token refreshToken = tokenGenerator.create(PURPOSE_REFRESH_TOKEN, id + user.getPassword(), securityConfig.getRefreshTokenExpiry());
@@ -78,7 +80,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Collection<DepartmentView> list() {
         ArrayList<Department>departmentview = (ArrayList<Department>) departmentRepository.findAll();
-        return departmentview.stream().map(item->new DepartmentView(item)).collect(Collectors.toList());
+        return departmentview.stream().map(DepartmentView::new).collect(Collectors.toList());
     }
 
     @Override
@@ -110,5 +112,41 @@ public class UserServiceImpl implements UserService {
       return Doctor.stream().map(DepartmentView::new).collect(Collectors.toList());
     }
 
+    @Override
+    public LeaveView applyleave(LeaveForm leaveForm) {
+        return  new LeaveView(leaveRepository.save(new LeaveDetails(leaveForm)));
 
+    }
+
+    @Override
+    public List<LeaveView> fechLeave(Integer id) {
+     return leaveRepository.findByUserUserId(id).stream().map(LeaveView::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LeaveView> fetchLeaveDetails() {
+    return  leaveRepository.findAll().stream().map(LeaveView::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public LeaveView approveLeave(Integer leaveId) {
+        LeaveDetails leaveDetails=leaveRepository.findByLeaveIdAndApproval(leaveId, LeaveDetails.Approval.INACTIVE.value);
+        leaveDetails.setApproval(LeaveDetails.Approval.ACTIVE.value);
+        leaveRepository.save(leaveDetails);
+        return new LeaveView(leaveDetails);
+
+
+    }
+
+    @Override
+    public LeaveView leaveDoctor(Integer userId, String date) {
+        LeaveDetails leaveDetails = leaveRepository.findByUserUserIdAndLeaveDateAndApproval(userId, date, LeaveDetails.Approval.ACTIVE.value);
+        if(leaveDetails != null){
+            return new LeaveView(leaveDetails);
+        }
+        else{
+            return new LeaveView();
+        }
+
+    }
 }
